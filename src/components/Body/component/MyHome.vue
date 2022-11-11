@@ -131,13 +131,19 @@ export default {
 .el-carousel__item h3 {
   color: #475669;
   opacity: 0.75;
-  line-height: 150px;
+  line-height: 400px;
   margin: 0;
   text-align: center;
+  background-image: url(../../../assets/picture/xsk.jpg);
+background-size: 100%;
+background-repeat: no-repeat;
+
+
 }
 
 .el-carousel__item:nth-child(2n) {
   background-color: #99a9bf;
+
 }
 
 .el-carousel__item:nth-child(2n + 1) {
