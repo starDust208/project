@@ -1,5 +1,5 @@
 <template>
-  <Menu mode="horizontal" :theme="theme" active-name="1">
+  <Menu mode="horizontal" :theme="theme" active-name="1" style="background-color: darkkhaki;">
     <MenuItem name="1">
       <Icon type="ios-paper" />
       <router-link to="/home"> 首页 </router-link>

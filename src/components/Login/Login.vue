@@ -1,53 +1,63 @@
 <template>
   <div class="container-login">
-    <div class="left"></div>
+    <div class="left">
+      <img src="/src/assets/login.jpg">
+    </div>
     <div class="right" v-if="state === 'login'">
-      <p style="font-size: 35px; color: rgb(0, 0, 0); font-weight: 500; margin-top: 50px;">登录</p>
-      <p style="font-size: 20px; color: rgb(0, 0, 0); margin-top: 10px; margin-left: 20px">Now ! Reading Time...</p>
-      <form class="navlist">
-        <div class="box">
-          <input class="ipt" placeholder="账号" v-model="username" @blur="judgmentLoginUsername"/>
-          <p class="tip" v-if="loginUsernameState === 0 ">账号格式错误</p>
+      <div class="frame">
+        <div class="content">
+          <p style="font-size: 35px; color: rgb(0, 0, 0); font-weight: 500; margin-top: 50px;">登录</p>
+          <p style="font-size: 20px; color: rgb(0, 0, 0); margin-top: 10px; margin-left: 20px">Now ! Reading Time...</p>
+          <form class="navlist">
+            <div class="box">
+              <input class="ipt" placeholder="账号" v-model="username" @blur="judgmentLoginUsername"/>
+              <p class="tip" v-if="loginUsernameState === 0 ">账号格式错误</p>
+            </div>
+            <div class="box">
+              <input class="ipt" placeholder="密码" v-model="password" type="password" @blur="judgmentLoginPassword"/>
+              <p class="tip" v-if="loginPasswordState === 0 " >密码格式错误</p>
+            </div>
+            <div class="box">
+              <input class="ipt-code" placeholder="验证码" v-model="inputcode" />
+              <div class="code" @click="changeCode">
+                {{ code }}
+              </div>
+            </div>
+          </form>
+          <h4 style="margin-left: 200px; color: rgb(149, 226, 107); margin-top: -18px; margin-bottom: 10px; cursor: pointer;" @click="stateToEnroll">欢迎加入我们，点此注册</h4>
+          <button class="btnlogin" @click="Login">Login</button>
         </div>
-        <div class="box">
-          <input class="ipt" placeholder="密码" v-model="password" type="password" @blur="judgmentLoginPassword"/>
-          <p class="tip" v-if="loginPasswordState === 0 " >密码格式错误</p>
-        </div>
-        <div class="box">
-          <input class="ipt-code" placeholder="验证码" v-model="inputcode" />
-          <div class="code" @click="changeCode">
-            {{ code }}
-          </div>
-        </div>
-      </form>
-      <h4 style="margin-left: 200px; color: rgb(149, 226, 107); margin-top: -18px; margin-bottom: 10px; cursor: pointer;" @click="stateToEnroll">欢迎加入我们，点此注册</h4>
-      <button class="btnlogin" @click="Login">Login</button>
+      </div>
     </div>
     <div class="right" v-if="state === 'enroll'">
-      <p style="font-size: 35px; color: rgb(0, 0, 0); font-weight: 500; margin-top: 50px;">注册</p>
-      <p style="font-size: 20px; color: rgb(0, 0, 0); margin-top: 10px; margin-left: 20px">Hello! Reading Time...</p>
-      <form class="navlist">
-        <div class="box">
-          <input class="ipt" placeholder="账号" v-model="username" @blur="judgmentEnrollUsername"/>
-          <p class="tip" v-if="EnrollUsernameState === 0">账号格式错误</p>
+      <div class="frame">
+        <div class="content">
+          <p style="font-size: 35px; color: rgb(0, 0, 0); font-weight: 500; margin-top: 50px;">注册</p>
+          <p style="font-size: 20px; color: rgb(0, 0, 0); margin-top: 10px; margin-left: 20px">Hello! Reading Time...</p>
+          <form class="navlist">
+            <div class="box">
+              <input class="ipt" placeholder="账号" v-model="username" @blur="judgmentEnrollUsername"/>
+              <p class="tip" v-if="EnrollUsernameState === 0">账号格式错误</p>
+            </div>
+            <div class="box">
+              <input class="ipt" placeholder="密码" v-model="password" type="password" @blur="judgmentEnrollPassword"/>
+              <p class="tip" v-if="EnrollPasswordState === 0">密码格式错误</p>
+            </div>
+            <div class="box">
+              <input class="ipt" placeholder="确认密码" v-model="surepassword" type="password" @blur="judgmentEnrollSurePassword"/>
+              <p class="tip" v-if="EnrollSurePasswordState === 0">密码与上述不同</p>
+            </div>
+            <div class="box">
+              <input class="ipt-code" placeholder="验证码" v-model="inputcode" />
+              <div class="code" @click="changeCode">
+                {{ code }}
+              </div>
+            </div>
+          </form>
+          <h4 style=" margin-left: 200px; color: rgb(149, 226, 107); margin-top: -18px; margin-bottom: 10px; cursor: pointer;" @click="stateToLogin">欢迎加入我们，点此登录</h4>
+          <button class="btnlogin" @click="Enroll">Enroll</button>
         </div>
-        <div class="box">
-          <input class="ipt" placeholder="密码" v-model="password" type="password" @blur="judgmentEnrollPassword"/>
-          <p class="tip" v-if="EnrollPasswordState === 0">密码格式错误</p>
-        </div>
-        <div class="box">
-          <input class="ipt" placeholder="确认密码" v-model="surepassword" type="password" @blur="judgmentEnrollSurePassword"/>
-          <p class="tip" v-if="EnrollSurePasswordState === 0">密码与上述不同</p>
-        </div>
-        <div class="box">
-          <input class="ipt-code" placeholder="验证码" v-model="inputcode" />
-          <div class="code" @click="changeCode">
-            {{ code }}
-          </div>
-        </div>
-      </form>
-      <h4 style=" margin-left: 200px; color: rgb(149, 226, 107); margin-top: -18px; margin-bottom: 10px; cursor: pointer;" @click="stateToLogin">欢迎加入我们，点此登录</h4>
-      <button class="btnlogin" @click="Enroll">Enroll</button>
+      </div>
     </div>
   </div>
 </template>
@@ -144,13 +154,34 @@ export default {
 <style lang="less" scoped>
 .container-login {
   display: flex;
+  background-color: beige;
+  margin-top:-1.4% ;
+  height:600px;
 }
 .left{
+  margin-top: 1%;
   width: 50%;
+}
+
+.left img{
+  width:90%;
+  height: 90%;
 }
 .right{
   width: 50%;
 }
+
+.frame{
+  border: solid;
+  margin-left: -5%;
+  margin-top: 1%;
+  width: 90%;
+}
+.content{
+  margin-left: 20%;
+  margin-bottom:3%;
+}
+
 h4 {
   margin-right: 20px;
   line-height: 20px;
